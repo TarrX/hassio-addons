@@ -9,10 +9,10 @@
   "description": "Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family",
   "environment": {
     "DB_ENGINE": "sqlite",
-    "APP_PORT": "8099"
+    "APP_PORT": "9925"
   },
   "ingress": true,
-  "ingress_port": 8099,
+  "ingress_port": 9925,
   "map": [
     "share:rw",
     "ssl:rw"
@@ -25,10 +25,10 @@
   },
   "panel_icon": "mdi:silverware-fork-knife",
   "ports": {
-    "8099/tcp": "8099"
+    "9925/tcp": "9925"
   },
   "ports_description": {
-    "80/tcp": "Web interface"
+    "9925/tcp": "Web interface"
   },
   "schema": {
     "ssl": "bool",
