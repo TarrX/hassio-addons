@@ -17,6 +17,8 @@ ARG BUILD_FROM
 ARG BUILD_VERSION
 FROM ${BUILD_FROM}
 
+FROM node:16
+
 ##################
 # 2 Modify Image #
 ##################
@@ -33,7 +35,7 @@ RUN \
 COPY rootfs/ /
 
 # Manual apps
-ENV PACKAGES="jq curl bash"
+ENV PACKAGES="jq curl bash npm"
 
 # Automatic apps & bashio
 RUN if ! command -v bash >/dev/null 2>/dev/null; then (apt-get update && apt-get install -yqq --no-install-recommends bash || apk add --no-cache bash); fi && \
@@ -59,10 +61,12 @@ RUN mkdir -p /tmpscripts /etc/cont-init.d && \
 
 RUN \
     # Add custom instructions to run.sh
-    sed -i '1d' /app/mealie/run.sh \ 
+    sed -i '1d' /app/mealie/run.sh \
     && cat /app/mealie/run.sh >> /run.txt \
     && cat /run.txt > /app/mealie/run.sh \
-    && chmod +x /app/mealie/run.sh 
+    && chmod +x /app/mealie/run.sh
+
+RUN npm install
 
 ############
 # 5 Labels #
